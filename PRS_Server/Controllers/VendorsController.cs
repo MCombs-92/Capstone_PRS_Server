@@ -8,37 +8,37 @@ using System.Web.Http;
 
 namespace PRS_Server.Controllers
 {
-    public class UsersController : ApiController {
+    public class VendorsController : ApiController  {
 
         private PRSDBContext db = new PRSDBContext();
 
 
         [HttpGet]
         [ActionName("List")]
-        public IEnumerable<User> List() {
-            return db.Users.ToList();
+        public IEnumerable<Vendor> List() {
+            return db.Vendors.ToList();
         }
 
         [HttpGet]
         [ActionName("Get")]
-        public User Get(int? id) {
+        public Vendor Get(int? id) {
             if (id == null) {
                 return null;
             }
-            return db.Users.Find(id);
+            return db.Vendors.Find(id);
 
         }
 
         [HttpPost]
         [ActionName("Create")]
-        public bool Create(User user) {
-            if (user == null) {
+        public bool Create(Vendor vendor) {
+            if (vendor == null) {
                 return false;
             }
             if (!ModelState.IsValid) {
                 return false;
             }
-            db.Users.Add(user);
+            db.Vendors.Add(vendor);
             db.SaveChanges();
             return true;
 
@@ -46,38 +46,39 @@ namespace PRS_Server.Controllers
 
         [HttpPost]
         [ActionName("Change")]
-        public bool Change(User user) {
-            if (user == null) {
+        public bool Change(Vendor vendor) {
+            if (vendor == null) {
                 return false;
             }
             if (!ModelState.IsValid) {
                 return false;
             }
-            var us = db.Users.Find(user.Id);
-            us.Username = user.Username;
-            us.Password = user.Password;
-            us.FirstName = user.FirstName;
-            us.LastName = user.LastName;
-            us.Phone = user.Phone;
-            us.Email = user.Email;
-            us.IsReviewer = user.IsReviewer;
-            us.IsAdmin = user.IsAdmin;
-            us.Active = user.Active;
+            var vend = db.Vendors.Find(vendor.Id);
+            vend.Code = vendor.Code;
+            vend.Name= vendor.Name;
+            vend.Address= vendor.Address;
+            vend.City= vendor.City;
+            vend.State= vendor.State;
+            vend.Zip= vendor.Zip;
+            vend.Phone = vendor.Phone;
+            vend.Email = vendor.Email;
+            vend.IsPreApproved= vendor.IsPreApproved;
+            vend.Active = vendor.Active;
             db.SaveChanges();
             return true;
         }
 
         [HttpPost]
         [ActionName("Remove")]
-        public bool Remove(User user) {
-            if (user == null) {
+        public bool Remove(Vendor vendor) {
+            if (vendor == null) {
                 return false;
             }
             if (!ModelState.IsValid) {
                 return false;
             }
-            var us = db.Users.Find(user.Id);
-            db.Users.Remove(us);
+            var vend = db.Vendors.Find(vendor.Id);
+            db.Vendors.Remove(vend);
             db.SaveChanges();
             return true;
 

@@ -8,37 +8,37 @@ using System.Web.Http;
 
 namespace PRS_Server.Controllers
 {
-    public class UsersController : ApiController {
+    public class ProductsController : ApiController {
 
         private PRSDBContext db = new PRSDBContext();
 
 
         [HttpGet]
         [ActionName("List")]
-        public IEnumerable<User> List() {
-            return db.Users.ToList();
+        public IEnumerable<Product> List() {
+            return db.Products.ToList();
         }
 
         [HttpGet]
         [ActionName("Get")]
-        public User Get(int? id) {
+        public Product Get(int? id) {
             if (id == null) {
                 return null;
             }
-            return db.Users.Find(id);
+            return db.Products.Find(id);
 
         }
 
         [HttpPost]
         [ActionName("Create")]
-        public bool Create(User user) {
-            if (user == null) {
+        public bool Create(Product product) {
+            if (product == null) {
                 return false;
             }
             if (!ModelState.IsValid) {
                 return false;
             }
-            db.Users.Add(user);
+            db.Products.Add(product);
             db.SaveChanges();
             return true;
 
@@ -46,38 +46,36 @@ namespace PRS_Server.Controllers
 
         [HttpPost]
         [ActionName("Change")]
-        public bool Change(User user) {
-            if (user == null) {
+        public bool Change(Product product) {
+            if (product == null) {
                 return false;
             }
             if (!ModelState.IsValid) {
                 return false;
             }
-            var us = db.Users.Find(user.Id);
-            us.Username = user.Username;
-            us.Password = user.Password;
-            us.FirstName = user.FirstName;
-            us.LastName = user.LastName;
-            us.Phone = user.Phone;
-            us.Email = user.Email;
-            us.IsReviewer = user.IsReviewer;
-            us.IsAdmin = user.IsAdmin;
-            us.Active = user.Active;
+            var prod = db.Products.Find(product.Id);
+            prod.PartNumber = product.PartNumber;
+            prod.Name = product.Name;
+            prod.Price= product.Price;
+            prod.Unit = product.Unit;
+            prod.PhotoPath= product.PhotoPath;
+            prod.Active= product.Active;
+            prod.VendorId= product.VendorId;
             db.SaveChanges();
             return true;
         }
 
         [HttpPost]
         [ActionName("Remove")]
-        public bool Remove(User user) {
-            if (user == null) {
+        public bool Remove(Product product) {
+            if (product == null) {
                 return false;
             }
             if (!ModelState.IsValid) {
                 return false;
             }
-            var us = db.Users.Find(user.Id);
-            db.Users.Remove(us);
+            var prod = db.Products.Find(product.Id);
+            db.Products.Remove(prod);
             db.SaveChanges();
             return true;
 
