@@ -211,6 +211,10 @@
     <Compile Include="Migrations\201806281546359_Updated PurchaseRequestLineItems model with new properties and attribute updates.Designer.cs">
       <DependentUpon>201806281546359_Updated PurchaseRequestLineItems model with new properties and attribute updates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806281828222_Small updates to PR model.cs" />
+    <Compile Include="Migrations\201806281828222_Small updates to PR model.Designer.cs">
+      <DependentUpon>201806281828222_Small updates to PR model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\PRSDBContext.cs" />
@@ -315,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806281546359_Updated PurchaseRequestLineItems model with new properties and attribute updates.resx">
       <DependentUpon>201806281546359_Updated PurchaseRequestLineItems model with new properties and attribute updates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806281828222_Small updates to PR model.resx">
+      <DependentUpon>201806281828222_Small updates to PR model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

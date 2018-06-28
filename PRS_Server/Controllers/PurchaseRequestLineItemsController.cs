@@ -12,6 +12,14 @@ namespace PRS_Server.Controllers
 
         private PRSDBContext db = new PRSDBContext();
 
+        private void CalcTotal(int purchaserequestid) {
+            var pr = db.PurchaseRequests.Find(purchaserequestid);
+            if (pr == null) return;
+            var lines = db.PurchaseRequestLineItems.Where(li => li.PurchaseRequestId == purchaserequestid);
+            pr.Total = lines.Sum(li => li.Quantity * li.Product.Price);
+            db.SaveChanges();
+        }
+
 
         [HttpGet]
         [ActionName("List")]
@@ -39,6 +47,8 @@ namespace PRS_Server.Controllers
                 return false;
             }
             db.PurchaseRequestLineItems.Add(purchaseRequestLineItems);
+
+            CalcTotal(purchaseRequestLineItems.PurchaseRequestId);
             db.SaveChanges();
             return true;
 
@@ -57,6 +67,8 @@ namespace PRS_Server.Controllers
             prli.PurchaseRequestId= purchaseRequestLineItems.PurchaseRequestId;
             prli.ProductId= purchaseRequestLineItems.ProductId;
             prli.Quantity= purchaseRequestLineItems.Quantity;
+
+            CalcTotal(purchaseRequestLineItems.PurchaseRequestId);
             db.SaveChanges();
             return true;
         }
@@ -72,6 +84,8 @@ namespace PRS_Server.Controllers
             }
             var prli = db.PurchaseRequestLineItems.Find(purchaseRequestLineItems.Id);
             db.PurchaseRequestLineItems.Remove(prli);
+
+            CalcTotal(purchaseRequestLineItems.PurchaseRequestId);
             db.SaveChanges();
             return true;
 

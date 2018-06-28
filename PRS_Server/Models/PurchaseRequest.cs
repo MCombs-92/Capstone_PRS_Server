@@ -42,6 +42,14 @@ namespace PRS_Server.Models {
         public virtual List<PurchaseRequestLineItem> PurchaseRequestLineItems { get; set; }
         public virtual User User { get; set; }
 
+        //public double Sum() {
+        //    double total = 0;
+        //    foreach (var i in PurchaseRequestLineItems) {
+        //        total += i.Product.Price;
+        //    }
+        //    return total;
+        //}
+
 
     }
 }
