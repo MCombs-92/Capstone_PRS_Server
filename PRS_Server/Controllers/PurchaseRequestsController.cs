@@ -61,6 +61,7 @@ namespace PRS_Server.Controllers
             pr.Status= purchaserequest.Status;
             pr.Total= purchaserequest.Total;
             pr.UserId= purchaserequest.UserId;
+            pr.Active= purchaserequest.Active;
             db.SaveChanges();
             return true;
         }

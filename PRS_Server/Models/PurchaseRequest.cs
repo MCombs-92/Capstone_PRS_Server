@@ -33,11 +33,13 @@ namespace PRS_Server.Models {
         [Required]
         public string Status { get; set; } = "NEW";
 
-        [Required]
         public double Total { get; set; } = 0;
+        public bool Active { get; set; }
 
         [Required]
         public int UserId { get; set; }
+
+        public virtual List<PurchaseRequestLineItem> PurchaseRequestLineItems { get; set; }
         public virtual User User { get; set; }
 
 
